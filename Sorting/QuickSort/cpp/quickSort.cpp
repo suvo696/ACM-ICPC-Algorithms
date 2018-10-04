@@ -1,41 +1,87 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-#define pb push_back
-
-void print(vector<int> &a, int n){
-	for(int i=0;i<n;i++){
-		cout<<a[i]<<" ";
-	}cout<<endl;
-}
-
-int partition(vector<int> &a, int l, int h){
-	int pivot = a[h];
-	int i = l-1;
-	for(int j=l;j<h;j++){
-		if(a[j]<=pivot)swap(a[++i],a[j]);
-	}
-	swap(a[++i],a[h]);
-	return i;
-}
-
-void quickSort(vector<int> &a, int l, int h){
-	if(l<h){
-		int pivot = partition(a,l,h);
-		quickSort(a, l, pivot-1);
-		quickSort(a, pivot+1, h);
-	}
-}
-
-int main(){
-	srand(time(0));
-	vector<int> a;
-	int n=10;
-	for(int i=0;i<n;i++){
-		a.pb(rand()%1001);
-	}
-	print(a,n);
-	quickSort(a,0,n-1);
-	print(a,n);
-
+/*
+ *  C# Program to Implement Quick Sort
+ */
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+ 
+namespace sortQuick
+{
+    class quickSort
+    {
+ 
+        private int[] array = new int[20];
+        private int len;
+ 
+        public void QuickSort()
+        {
+            sort(0, len - 1);
+        }
+ 
+        public void sort(int left, int right)
+        {
+            int pivot, leftend, rightend;
+ 
+            leftend = left;
+            rightend = right;
+            pivot = array[left];
+ 
+            while (left < right)
+            {
+                while ((array[right] >= pivot) && (left < right))
+                {
+                    right--;
+                }
+ 
+                if (left != right)
+                {
+                    array[left] = array[right];
+                    left++;
+                }
+ 
+                while ((array[left] <= pivot) && (left < right))
+                {
+                    left++;
+                }
+ 
+                if (left != right)
+                {
+                    array[right] = array[left];
+                    right--;
+                }
+            }
+ 
+            array[left] = pivot;
+            pivot = left;
+            left = leftend;
+            right = rightend;
+ 
+            if (left < pivot)
+            {
+                sort(left, pivot - 1);
+            }
+ 
+            if (right > pivot)
+            {
+                sort(pivot + 1, right);
+            }
+        }
+ 
+        public static void Main()
+        {
+            quickSort q_Sort = new quickSort();
+ 
+            int[] array = { 4, 3, 1, 4, 6, 7, 5, 4, 32, 5, 26, 187, 8 };
+            q_Sort.array = array;
+            q_Sort.len = q_Sort.array.Length;
+            q_Sort.QuickSort();
+ 
+            for (int j = 0; j < q_Sort.len; j++)
+            {
+                Console.WriteLine(q_Sort.array[j]);
+            }
+            Console.ReadKey();
+        }
+    }
 }
