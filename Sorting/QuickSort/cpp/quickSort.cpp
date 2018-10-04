@@ -49,6 +49,7 @@ namespace sortQuick
                 {
                     array[right] = array[left];
                     right--;
+                  
                 }
             }
  
